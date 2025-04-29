@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 // app.use(cors());
 
 // CORS configuration
-// Remove any existing CORS middleware and replace with this:
+// Define CORS options
 const corsOptions = {
   origin: 'https://savio96alumni-finance.vercel.app', // Your frontend URL
   credentials: true,
@@ -37,6 +37,14 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
+// Apply CORS with the options
+app.use(cors(corsOptions));
+
+// Handle OPTIONS preflight requests explicitly
+app.options('*', cors(corsOptions));
+
+// Set trust proxy if using Vercel or other proxy
+app.set('trust proxy', 1);
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
