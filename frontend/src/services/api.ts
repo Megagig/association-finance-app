@@ -3,12 +3,14 @@ import { ApiResponse } from '../types';
 
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    'https://association-finance-app.vercel.app/api',
   headers: {
     'Content-Type': 'application/json',
   },
   // Add timeout to prevent hanging requests
-  timeout: 10000,
+  timeout: 30000,
 });
 
 // Add request interceptor to add auth token
@@ -54,15 +56,17 @@ export const get = async <T>(
   } catch (error: any) {
     console.error(`GET request to ${url} failed:`, error);
     if (error.response) {
-      return error.response.data || {
-        success: false,
-        message: `Request failed with status ${error.response.status}`,
-      };
+      return (
+        error.response.data || {
+          success: false,
+          message: `Request failed with status ${error.response.status}`,
+        }
+      );
     }
     return {
       success: false,
       message: error.message || 'Network error',
-      data: undefined
+      data: undefined,
     };
   }
 };
@@ -74,7 +78,11 @@ export const post = async <T>(
   config?: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
-    const response: AxiosResponse<ApiResponse<T>> = await api.post(url, data, config);
+    const response: AxiosResponse<ApiResponse<T>> = await api.post(
+      url,
+      data,
+      config
+    );
     return response.data;
   } catch (error: any) {
     if (error.response) {
@@ -94,7 +102,11 @@ export const put = async <T>(
   config?: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
-    const response: AxiosResponse<ApiResponse<T>> = await api.put(url, data, config);
+    const response: AxiosResponse<ApiResponse<T>> = await api.put(
+      url,
+      data,
+      config
+    );
     return response.data;
   } catch (error: any) {
     if (error.response) {
@@ -114,7 +126,11 @@ export const patch = async <T>(
   config?: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
-    const response: AxiosResponse<ApiResponse<T>> = await api.patch(url, data, config);
+    const response: AxiosResponse<ApiResponse<T>> = await api.patch(
+      url,
+      data,
+      config
+    );
     return response.data;
   } catch (error: any) {
     if (error.response) {
@@ -133,7 +149,10 @@ export const del = async <T>(
   config?: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
-    const response: AxiosResponse<ApiResponse<T>> = await api.delete(url, config);
+    const response: AxiosResponse<ApiResponse<T>> = await api.delete(
+      url,
+      config
+    );
     return response.data;
   } catch (error: any) {
     if (error.response) {
