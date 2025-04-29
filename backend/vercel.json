@@ -10,7 +10,7 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/(.*)",
       "dest": "dist/index.js",
       "headers": {
         "Access-Control-Allow-Origin": "https://savio96alumni-finance.vercel.app",
