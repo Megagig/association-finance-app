@@ -3,9 +3,7 @@ import { ApiResponse } from '../types';
 
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_URL ||
-    'https://association-finance-app.vercel.app/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
