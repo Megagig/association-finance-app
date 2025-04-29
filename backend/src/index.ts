@@ -29,17 +29,32 @@ const PORT = process.env.PORT || 5000;
 
 // CORS configuration
 
-// Replace your current cors() middleware with this:
+// IMPORTANT: We need to handle OPTIONS preflight requests BEFORE other middleware
+app.options(
+  '*',
+  cors({
+    origin: [
+      'https://savio96alumni-finance.vercel.app',
+      'http://localhost:3000',
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+);
+
+// CORS configuration for all other requests
 app.use(
   cors({
     origin: [
       'https://savio96alumni-finance.vercel.app',
-      'http://localhost:3000', // For local development
-      // Add any other frontend URLs that might access this API
+      'http://localhost:3000',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // This is important if you're using cookies/sessions
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
 app.use(express.json());

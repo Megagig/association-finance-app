@@ -3,7 +3,6 @@
     {
       "source": "/api/(.*)",
       "destination": "https://association-finance-app.vercel.app/api/$1"
-    },
-    { "source": "/(.*)", "destination": "/index.html" }
+    }
   ]
 }
