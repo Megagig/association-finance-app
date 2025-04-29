@@ -25,7 +25,23 @@ const app: Application = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+// app.use(cors());
+
+// CORS configuration
+
+// Replace your current cors() middleware with this:
+app.use(
+  cors({
+    origin: [
+      'https://savio96alumni-finance.vercel.app',
+      'http://localhost:3000', // For local development
+      // Add any other frontend URLs that might access this API
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // This is important if you're using cookies/sessions
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
