@@ -39,6 +39,10 @@ const productionOrigins = [
   'https://finance.savio96alumni.com.ng',
   'http://api.savio96alumni.com.ng',
   'https://api.savio96alumni.com.ng',
+  'https://association-finance-app.vercel.app',
+  'http://association-finance-app.vercel.app',
+  'https://savio96alumni-finance.vercel.app',
+  'http://savio96alumni-finance.vercel.app',
 ];
 
 const allowedOrigins =
