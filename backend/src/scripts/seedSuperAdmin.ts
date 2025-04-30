@@ -10,7 +10,9 @@ dotenv.config();
 // Connect to MongoDB
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/financial-hub');
+    const conn = await mongoose.connect(
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/financial-hub'
+    );
     console.log(`MongoDB Connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
@@ -25,31 +27,33 @@ const seedSuperAdmin = async () => {
     // First, make sure we have the correct UserRole values
     console.log('Available UserRoles:', Object.values(UserRole));
     // Check if a Super Admin already exists
-    const existingSuperAdmin = await User.findOne({ role: UserRole.SUPER_ADMIN });
-    
+    const existingSuperAdmin = await User.findOne({
+      role: UserRole.SUPER_ADMIN,
+    });
+
     if (existingSuperAdmin) {
       console.log('Super Admin already exists:', existingSuperAdmin.email);
       return;
     }
-    
+
     // Default Super Admin credentials (for development only)
     const superAdminData = {
       firstName: 'Super',
       lastName: 'Admin',
-      email: 'superadmin@example.com',
-      password: 'SuperAdmin123!', // This should be changed in production
+      email: 'Megagigdev@gmail.com',
+      password: 'Allroundexploit@247', // This should be changed in production
       role: UserRole.SUPER_ADMIN,
       isEmailVerified: true, // Set to true for development
-      phoneNumber: '1234567890',
+      phoneNumber: '08060374755',
       membershipId: 'SUPER001',
       dateJoined: new Date(),
-      isActive: true
+      isActive: true,
     };
-    
+
     // Create the Super Admin user with plain password
     // The password will be hashed by the pre-save hook in the user model
     const superAdmin = new User(superAdminData);
-    
+
     await superAdmin.save();
     console.log('Super Admin created successfully:', superAdmin.email);
   } catch (error) {
@@ -61,55 +65,59 @@ const seedSuperAdmin = async () => {
 const seedAdminUsers = async () => {
   try {
     // Check if Admin Level 1 already exists
-    const existingAdminLevel1 = await User.findOne({ role: UserRole.ADMIN_LEVEL_1 });
-    
+    const existingAdminLevel1 = await User.findOne({
+      role: UserRole.ADMIN_LEVEL_1,
+    });
+
     if (!existingAdminLevel1) {
       // Default Admin Level 1 credentials
       const adminLevel1Data = {
         firstName: 'Admin',
         lastName: 'Level1',
-        email: 'admin1@example.com',
+        email: 'megagigsolution@gmail.com',
         password: 'AdminLevel1!', // This should be changed in production
         role: UserRole.ADMIN_LEVEL_1,
         isEmailVerified: true, // Set to true for development
         phoneNumber: '1234567891',
         membershipId: 'ADMIN001',
         dateJoined: new Date(),
-        isActive: true
+        isActive: true,
       };
-      
+
       // Create the Admin Level 1 user with plain password
       // The password will be hashed by the pre-save hook in the user model
       const adminLevel1 = new User(adminLevel1Data);
-      
+
       await adminLevel1.save();
       console.log('Admin Level 1 created successfully:', adminLevel1.email);
     } else {
       console.log('Admin Level 1 already exists:', existingAdminLevel1.email);
     }
-    
+
     // Check if Admin Level 2 already exists
-    const existingAdminLevel2 = await User.findOne({ role: UserRole.ADMIN_LEVEL_2 });
-    
+    const existingAdminLevel2 = await User.findOne({
+      role: UserRole.ADMIN_LEVEL_2,
+    });
+
     if (!existingAdminLevel2) {
       // Default Admin Level 2 credentials
       const adminLevel2Data = {
         firstName: 'Admin',
         lastName: 'Level2',
-        email: 'admin2@example.com',
+        email: 'overcomersdigest@gmail.com',
         password: 'AdminLevel2!', // This should be changed in production
         role: UserRole.ADMIN_LEVEL_2,
         isEmailVerified: true, // Set to true for development
         phoneNumber: '1234567892',
         membershipId: 'ADMIN002',
         dateJoined: new Date(),
-        isActive: true
+        isActive: true,
       };
-      
+
       // Create the Admin Level 2 user with plain password
       // The password will be hashed by the pre-save hook in the user model
       const adminLevel2 = new User(adminLevel2Data);
-      
+
       await adminLevel2.save();
       console.log('Admin Level 2 created successfully:', adminLevel2.email);
     } else {
